@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task List</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        /*header {
+            background-image: url("https://st.depositphotos.com/2325841/2524/i/950/depositphotos_25245701-stock-photo-to-do-list.jpg");
+            margin-left = 2px;
+            padding-left = 2px;
+
+        }*/
+        
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="text-center bg-dark">
+            <h1 class="m-3 p-3 text-white" >
+                TODO
+            </h1>
+            
+        </header>
+        
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

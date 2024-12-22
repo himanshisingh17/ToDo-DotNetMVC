@@ -1,0 +1,39 @@
+﻿@model ToDo
+
+<h2 class="text-center">New Task</h2>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="Add" method="post" class="jumbotron">
+    <div class="mb-3">
+        <label asp-for="Description" class="col-form-label-lg" class="form-control">Description</label>
+        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+    </div>
+    <div class="mb-3" class="form-group">
+        <label asp-for="CategoryId" class="col-form-label-lg">Category</label>
+        <select asp-for="CategoryId"  class="form-control"
+                asp-items="@(new SelectList(ViewBag.Categories, "CategoryId", "Name"))">
+            <option value=""></option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="DueDate" class="col-form-label-lg">Completion Date</label>
+        <input asp-for="DueDate" class="form-control" type="text" placeholder="dd-mm-yyyy"/>
+    </div>
+    <div class="mb-3">
+        <label asp-for="StatusId" class="col-form-label-lg">Status</label>
+        <select asp-for="StatusId" class="form-control"
+                asp-items="@(new SelectList(ViewBag.Statuses,"StatusId","Name"))"></select>
+    </div>
+    <div class="col-md-12 text-center" style="margin-top:50px">
+        <button type="submit" class="btn btn-success col-3" style="margin-right:10px">Add</button>
+        <a asp-action="Index" class="btn btn-danger col-3" style="margin-left:10px">Cancel</a>
+    </div>
+    
+</form>
+
+<footer class="bg-dark text-light py-3 mt-5">
+    <div class="container text-center">
+        <p>&copy; 2023 Your To-Do App. All rights reserved, created by MP.</p>
+    </div>
+</footer>

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<ToDo>
+
+
+<h2 class=" text-center">Your Task List</h2>
+<div class="row" class="table table-dark">
+    <div class="col-md-2">
+        <form asp-action="Filter" method="post" class="table table-dark">
+            <div class="mb-3" class="form-group" class="table table-dark">
+                <label class="form-label">Category</label>
+                <select name="filter" class="form-select" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.Categories,"CategoryId","Name", ViewBag.Filters.CategoryId))">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="mb-3" class="form-group" class="table table-dark">
+                <label class="form-label">Pending Task</label>
+                <select name="filter" class="form-select" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.DueFilters,"Key","Value", ViewBag.Filters.Due))">
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <div class="mb-3" class="form-group" class="table table-dark">
+                <label class="form-label">Status Of Task</label>
+                <select name="filter" class="form-select" class="form-control"
+                        asp-items="@(new SelectList(ViewBag.Statuses,"StatusId","Name", ViewBag.Filters.StatusId))">
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+            <a asp-action="Index" asp-route-id="" class="btn btn-primary">Clear</a>
+        </form>
+
+        @*//change for About us and contact US*@
+        <div class="btn-group-vertical btn-group-sm" style="margin-top:15px">
+            <a href="/home/aboutus">
+                <button type="button" class="btn btn-secondary " style="margin-right:10px"> TODO -About Us</button>
+
+            </a>
+        </div>
+        <div class="btn-group-vertical btn-group-sm" style="margin-top:15px">
+            <a href="/home/contactus">
+                <button type="button" class="btn btn-secondary " style="margin-right:10px">TODO Contact Us</button>
+            </a>
+        </div>
+        <div class="btn-group-vertical btn-group-sm" style="margin-top:15px">
+            <a href="/home/blog">
+                <button type="button" class="btn btn-secondary " style="margin-right:10px">TM Improvement</button>
+            </a>
+        </div>
+
+    </div>
+    <div class="col-md-10">
+        <form asp-action="MarkComplete" method="post" asp-route-id="@ViewBag.Filters.FilterString" class="table table-borderless text-white">
+            <table class="table table-bordered table-striped mt-2">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>DueDate</th>
+                        <th>Status</th>
+                        <th class="w-25"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ToDo task in Model)
+                    {
+                        string overdue = task.Overdue ? "bg-warning" : "";
+        <tr>
+            <td>@task.Description</td>
+            <td>@task.Category.Name</td>
+            <td class="@overdue">@task.DueDate?.ToShortDateString()</td>
+            <td class="@overdue">@task.Status.Name</td>
+            <td>
+                @if (task.StatusId == "open")
+                {
+<button type="submit" class="btn btn-primary btn-sm"
+        name="@nameof(ToDo.Id)" value="@task.Id">
+    Mark Completed
+</button>}
+            </td>
+        </tr>
+}
+                </tbody>
+            </table>
+        </form>
+        <form asp-action="DeleteComplete" method="post" asp-route-id="@ViewBag.Filters.FilterString">
+            <div class="col-md-12 text-center" style="margin-top:50px">
+                <a asp-action="Add" class="btn btn-success col-3" style="margin-right:10px">Add New Task</a>
+                <button type="submit" class="btn btn-danger col-3" style="margin-left:10px">Delete Completed Task</button>
+            </div>
+        </form>
+    </div>
+</div>
