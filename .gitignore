@@ -1,1 +1,19 @@
+# Ignore .vs folder (Visual Studio settings)
 .vs/
+
+# Ignore build outputs
+TodoAppMvc/bin/
+TodoAppMvc/obj/
+
+# Ignore user-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Ignore IDE-specific files (e.g., Visual Studio Code, JetBrains, etc.)
+.vscode/
+.idea/
+
+# Ignore other temporary files
+*.log
