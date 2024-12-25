@@ -2,8 +2,10 @@
 .vs/
 
 # Ignore build outputs
-./TodoAppMvc/bin/
-./TodoAppMvc/obj/
+C:/Users/HS/Desktop/ToDoWeb/TodoAppMvc/bin
+TodoAppMvc/bin/
+C:/Users/HS/Desktop/ToDoWeb/TodoAppMvc/obj
+TodoAppMvc/obj/
 
 # Ignore user-specific files
 *.user
